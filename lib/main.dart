@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import './destiny/SecondPage.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -38,11 +40,26 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ElevatedButton(onPressed: () {}, child: Text("Pindah Activity")),
-                ElevatedButton(onPressed: () {}, child: Text("Pindah Activity Dengan Data")),
-                ElevatedButton(onPressed: () {}, child: Text("Pindah Activity Dengan Object")),
+                ElevatedButton(
+                    onPressed: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => SecondPage())
+                    ),
+                    child: Text("Pindah Activity")),
+                Padding(padding: EdgeInsets.all(6.0)),
+                ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Pindah Activity Dengan Data")),
+                Padding(padding: EdgeInsets.all(6.0)),
+                ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Pindah Activity Dengan Object")),
+                Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(onPressed: () {}, child: Text("Dial Number")),
-                ElevatedButton(onPressed: () {}, child: Text("Pindah Activity Untuk Result")),
+                Padding(padding: EdgeInsets.all(6.0)),
+                ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Pindah Activity Untuk Result")),
               ],
             )
           ],
