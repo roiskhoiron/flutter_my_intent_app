@@ -7,8 +7,6 @@ import './destiny/ActivityWithDataPage.dart';
 import './destiny/ActivityWithObjectPage.dart';
 import './destiny/SecondPage.dart';
 
-const _phoneNumber = 'tel:+62 823 3462 6351';
-
 void main() {
   runApp(MyApp());
 }
@@ -35,6 +33,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  Future<void> _makePhoneCall(String url) async {
+    await launch(url);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+              children: <Widget>[
                 ElevatedButton(
                     onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -72,7 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("Pindah Activity Dengan Object")),
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
-                    onPressed: () => _launchDial,
+                    onPressed: () {
+                      _makePhoneCall('tel:+62878283473');
+                    },
                     child: Text("Dial Number")),
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
@@ -87,5 +92,4 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-Future<void> _launchDial() async =>
-    await canLaunch(_phoneNumber) ? await launch(_phoneNumber) : print('Could not Dial $_phoneNumber');
+
