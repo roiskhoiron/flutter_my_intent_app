@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './destiny/SecondPage.dart';
+import './destiny/ActivityWithDataPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -43,12 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                     onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (BuildContext context) => SecondPage())
-                    ),
+                            builder: (BuildContext context) => SecondPage())),
                     child: Text("Pindah Activity")),
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                            builder: (BuildContext context) => ActivityWithDataPage("Rois Khoiron", 22)),
+                    ),
                     child: Text("Pindah Activity Dengan Data")),
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
