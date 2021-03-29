@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_my_intent_app/model/Users.dart';
 
 import './destiny/ActivityWithDataPage.dart';
 import './destiny/ActivityWithObjectPage.dart';
 import './destiny/SecondPage.dart';
+
+const _phoneNumber = 'tel:+62 823 3462 6351';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +24,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class MyHomePage extends StatefulWidget {
   Users newUser = Users(24, "Rois Khoiron");
 
@@ -67,7 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                     child: Text("Pindah Activity Dengan Object")),
                 Padding(padding: EdgeInsets.all(6.0)),
-                ElevatedButton(onPressed: () {}, child: Text("Dial Number")),
+                ElevatedButton(
+                    onPressed: () => _launchDial,
+                    child: Text("Dial Number")),
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
                     onPressed: () {},
@@ -80,3 +86,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+Future<void> _launchDial() async =>
+    await canLaunch(_phoneNumber) ? await launch(_phoneNumber) : print('Could not Dial $_phoneNumber');
