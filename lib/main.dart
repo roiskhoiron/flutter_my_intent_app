@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_my_intent_app/model/Users.dart';
 import './destiny/ActivityWithDataPage.dart';
 import './destiny/ActivityWithObjectPage.dart';
 import './destiny/SecondPage.dart';
+import './destiny/ActivityWithResultPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,9 +36,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String _information = 'No Information Yet';
 
   Future<void> _makePhoneCall(String url) async {
     await launch(url);
+  }
+
+  void updateInformation(String information) {
+    setState(() => _information = information);
   }
 
   @override
@@ -68,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
                     onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
+                          CupertinoPageRoute(
+                              fullscreenDialog: true,
                               builder: (BuildContext context) =>
                                   ActivityWithObjectPage(widget.newUser)),
                         ),
@@ -81,8 +90,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("Dial Number")),
                 Padding(padding: EdgeInsets.all(6.0)),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final information = await Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            fullscreenDialog: true,
+                            builder: (BuildContext context) => ActivityWithResultPage()),
+                      );
+
+                      updateInformation(information);
+                    },
                     child: Text("Pindah Activity Untuk Result")),
+                Padding(padding: EdgeInsets.all(6.0)),
+                Text("Hasil $_information", style: TextStyle(fontSize: 20.0), textAlign: TextAlign.center,)
               ],
             )
           ],
@@ -91,5 +111,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
